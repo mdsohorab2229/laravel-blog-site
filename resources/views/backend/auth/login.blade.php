@@ -2,7 +2,7 @@
 @section('page_title','Login')
 @section('content')
 
-    {!! Form::open([]) !!}
+    {!! Form::open(['method'=>'post','route'=>'login']) !!}
     {!! Form::label('email', 'E-Mail Address') !!}
     {!! Form::email('email', null,['class'=>$errors->has('email')? 'is-invalid form-control form-control-sm':'form-control form-control-sm']) !!}
     @error('email')

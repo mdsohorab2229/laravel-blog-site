@@ -1,18 +1,13 @@
 @extends('backend.auth.layouts.master')
 @section('page_title','Register')
 @section('content')
-
-    {!! Form::open(['method'=>'post','route'=>'register']) !!}
-    {!! Form::label('name','Name') !!}
-    {!! Form::text('name',null,['class'=>$errors->has('name') ? 'is-invalid form-control form-control-sm':'form-control form-control-sm']) !!}
-    @error('name')
-    <p class="text-danger">{{$message}}</p>
-    @enderror
+    {!! Form::open(['method'=>'post','route'=>'password.update']) !!}
     {!! Form::label('email', 'E-Mail Address') !!}
-    {!! Form::email('email', null,['class'=>$errors->has('email') ? 'is-invalid form-control form-control-sm':'form-control form-control-sm']) !!}
+    {!! Form::email('email', old('email', $request->email),['class'=>$errors->has('email') ? 'is-invalid form-control form-control-sm':'form-control form-control-sm']) !!}
     @error('email')
     <p class="text-danger">{{$message}}</p>
     @enderror
+    {!! Form::hidden('token',$request->route('token')) !!}
     {!! Form::label('password', 'Password') !!}
     {!! Form::password('password',['class'=>$errors->has('password') ? 'is-invalid form-control form-control-sm':'form-control form-control-sm']) !!}
     @error('password')
@@ -24,9 +19,8 @@
     <p class="text-danger">{{$message}}</p>
     @enderror
     <div class="d-grid">
-        {!! Form::button('REGISTER', ['type'=>'submit','class'=>'btn btn-outline-info mt-2']) !!}
+        {!! Form::button('RESET PASSWORD', ['type'=>'submit','class'=>'btn btn-outline-info mt-2']) !!}
     </div>
     {!! Form::close() !!}
-    <p class="mt-2">Already register ? <a href="{{route('login')}}">Login Here</a></p>
 
 @endsection

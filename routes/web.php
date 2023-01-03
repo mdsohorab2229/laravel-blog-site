@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\BackEndController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,13 @@ Route::controller(FrontendController::class)->group(function (){
 
 Route::controller(BackEndController::class)->prefix('dashboard')->group(function (){
     Route::get('/','index')->name('back.index');
+    Route::controller(CategoryController::class)->prefix('category')->group(function (){
+        Route::get('/','index');
+        Route::get('/create','create');
+        Route::post('/store','store');
+        Route::put('/update/{id}','update');
+        Route::delete('/delete/{id}','destroy');
+    });
 });
 
 require __DIR__.'/auth.php';
